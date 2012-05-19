@@ -18,18 +18,18 @@ function git_cwd_info () {
     fi
     GIT_DIRTY=""
     if [[ "$GIT_REPO_PATH" != '.' && `git ls-files -m` != "" ]]; then
-      GIT_DIRTY=" ✗"
+      GIT_DIRTY="%{$fg[red]%}✗%{$reset_color%} "
     fi
-    echo "${GIT_BRANCH} ${GIT_COMMIT_ID}${GIT_MODE}${GIT_DIRTY}"
+    echo "${GIT_DIRTY}${GIT_BRANCH} ${GIT_COMMIT_ID}${GIT_MODE}"
   fi
 }
 
 local user_machine="%{$fg[green]%}%n%{$fg[white]%}@%{$fg[green]%}%m"
 if [[ $USERNAME == 'root' ]]; then
-  local user_machine='%{$fg[red]%}%n%{$fg[white]%}@%{$fg[green]%}%m'
+  user_machine='%{$fg[red]%}%n%{$fg[white]%}@%{$fg[green]%}%m'
 fi
-
-PROMPT='${user_machine} %{$fg[red]%}➜ %{$fg[cyan]%}%4~
+# ➜
+PROMPT='${user_machine}%{$reset_color%}:%{$fg[cyan]%}%4~
 ${smiley} %{$reset_color%}'
 
 RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt) $(git_cwd_info)%{$reset_color%}'
