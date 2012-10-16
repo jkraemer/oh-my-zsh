@@ -31,6 +31,12 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(jk git rails textmate bundler gem node npm rvm rake)
 
+# http://talkings.org/post/5236392664/zsh-and-slow-git-completion
+# appears to fix git branch completion slowness, not sure why...
+__git_files () {
+  _wanted files expl 'local files' _files
+}
+
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
@@ -47,3 +53,5 @@ export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 
 if [ -s /Users/jk/.rvm/scripts/rvm ] ; then source /Users/jk/.rvm/scripts/rvm ; fi
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
